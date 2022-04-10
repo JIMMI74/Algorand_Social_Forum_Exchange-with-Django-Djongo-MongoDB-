@@ -7,7 +7,7 @@
     <div class="col-8">
         <div class="card my-3 ">
             <div class="card-header bg-info ">
-                <h4>{% if request.user == user %}<h3><strong>{{ user}}</strong></h3>{% endif %}<strong>Personal Info</strong></h4>
+                <h4>{% if request.user == user %}<h3><strong>{{ user}}</strong></h3>{% endif %}<strong>PORTFOLIO UPDATE</strong></h4>
 
                 <div class="card-body ">
                 <div class="card-header bg-primary"> date enter: {{ user.date_joined|date:"d M Y" }}
@@ -16,6 +16,8 @@
                     <p class="mb-0">- Total Ctv = <strong>{{ algo_usd }}$  </strong></p>
                 <p class="mb-0">- Balance Wallet USD = <strong>{{ remaining_balance }}$</strong></p>
                 <p class="mb-0">- Gain/Loss : <strong>{{ profit }}</strong></p>
+                    <p class="mb-0">- PENDING USD: <strong>{{ pending_USD }}</strong></p>
+                    <p class="mb-0">- PENDING ALGO: <strong>{{ pending_ALGO }}</strong></p>
                 </div>
                 </div>
             </div>
@@ -33,7 +35,6 @@
                 <p>Market cap: <strong>{{ market_cap }}%</strong></p>
                 <p>Volume 24h: <strong>{{ vol24h }}%</strong></p>
                 <p>Percentage change 24h: <strong>{{ percent_24h }}%</strong></p>
-                <p>Average coins bought from Coinmarketcap: <strong>{{ average_n_coin_mkt }}</strong></p>
             </div>
         </div>
         <div class="card-footer bg-primary"></div>
@@ -47,9 +48,10 @@
                     </div>
                         <div class="card-body">
                             <div class="card-body">
-                                <p>{% if request.user == user %} Your Status Transaction {% endif %}</p>
+                                <p>{% if request.user == user %}<h3><strong>Your Status Order</strong></h3> {% endif %}</p>
+                                <hr>
                                     {% for ordering in orders %}
-                                   <strong> {{ ordering.status }} {{ ordering.datetime}}</strong>
+                                <strong><h4><br>Number Order {{ ordering.order_number }}</h4>Status-><strong>({{ ordering.status }})  </strong>{{ ordering.datetime}}</strong>
                                     {% endfor %}
                             </div>
                         </div>

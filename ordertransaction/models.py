@@ -4,6 +4,7 @@ from djongo.models.fields import ObjectIdField
 from accounts.models import Profile
 
 
+
 class Order(models.Model):
     CHOICES = (("BUY", "BUY"), ("SELL", "SELL"))
 
@@ -14,6 +15,7 @@ class Order(models.Model):
     price = models.FloatField()
     quantity_max_insert = models.FloatField()
     datetime = models.DateTimeField(auto_now_add=True)
+    order_number = models.IntegerField()
 
 
 
@@ -25,3 +27,7 @@ class Transaction(models.Model):
     quantity = models.FloatField()
     price = models.FloatField()
     datetime = models.DateTimeField(auto_now_add=True)
+
+class OrderManager(models.Model):
+
+    last_order_number = models.IntegerField(default=0)

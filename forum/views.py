@@ -6,7 +6,7 @@ from .forms import DiscussionModelForm, PostModelForm
 from .models import Discussion, Post, HomepageSection
 from .mixins import StaffMixing
 from django.core.paginator import Paginator
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 
 class CreateSection(StaffMixing, CreateView):
@@ -49,11 +49,9 @@ def create_discussion(request, pk):
 def discussion_view(request, pk):
     discussion = get_object_or_404(Discussion, pk=pk)
     posts_discussion = Post.objects.filter(discussion=discussion)
-
-    paginator = Paginator(posts_discussion, 3)
+    paginator = Paginator(posts_discussion, 10)
     page = request.GET.get("page")
     posts = paginator.get_page(page)
-
     form_request = PostModelForm()
     context = {
         "discussion": discussion,
@@ -87,7 +85,8 @@ def add_request(request, pk):
 
 class DeletePost(DeleteView):
     model = Post
-    success_url = "social_page"
+    success_url = reverse_lazy('social_page')
+
 
     def get_queryset(self):
         queryset = super().get_queryset()

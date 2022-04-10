@@ -9,10 +9,8 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from forum.models import Discussion, Post, HomepageSection
-from django.db.models import Avg, Sum
 from django.db.models import Q
 from ordertransaction.models import Transaction, Order
-
 
 
 def registration_view(request):
@@ -42,11 +40,13 @@ def user_profile(request, username):
     user = get_object_or_404(User, username=username)
     profile = Profile.objects.get(user=user)
     algowallet = profile.ALGO_Wallet
+    pending_ALGO = profile.ALGO_Pending_Wallet
+    pending_USD = profile.USD_Pending_Wallet
+    print(profile.USD_Pending_Wallet)
     price = algoValue()
     market_cap = algo_marketCap()
     vol24h = algo_perc24h()
     percent_24h = algo_vol24h()
-    average_n_coin_mkt = Purchase.objects.aggregate(average_purchased_coin=Avg('purchased_coin'))
     orders = Order.objects.filter(profile=profile).order_by('datetime')
     orders_transactions = Transaction.objects.filter(Q(call=request.user) | Q(put=request.user)).order_by('-datetime')
     purchase = Purchase.objects.filter(profile=profile)
@@ -54,17 +54,10 @@ def user_profile(request, username):
     remaining_balance = round(profile.USD_wallet, 6)
     profit = round(profile.profit)
     context = {'user': user, 'algo_usd': algo_usd, 'remaining_balance': remaining_balance, 'purchase': purchase,
-               'profit': profit, 'price': price,'market_cap': market_cap, 'vol24h': vol24h, 'percent_24h': percent_24h,
-               'average_n_coin_mkt': average_n_coin_mkt, 'orders_transactions': orders_transactions, 'orders': orders,
-               'algowallet': algowallet}
+               'profit': profit, 'price': price, 'market_cap': market_cap, 'vol24h': vol24h, 'percent_24h': percent_24h,
+               'orders_transactions': orders_transactions, 'orders': orders,
+               'algowallet': algowallet, 'pending_USD':  pending_USD, 'pending_ALGO': pending_ALGO}
     return render(request, 'accounts/user_profile.html', context)
-
-
-
-
-
-
-
 
 
 def edit_profile(request):

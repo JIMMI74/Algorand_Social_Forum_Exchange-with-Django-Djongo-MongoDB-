@@ -8,7 +8,7 @@
 7) If you are the admin you can go to the social page and create a section for users to discuss.
 8) After registering, you are automatically assigned ALGO coins and 10,000 USD which you can view in your wallet.
 9) After creating the discussion section, registered users will be able to comment and use it as a forum. The user also has his own social profile.
-10) a) You can buy and sell Algo using coinmarketcap b)Place a sell or buy price order for coins within the DEX (decentralized exchange between users)
+10) a) You can buy and sell Algo using coinmarketcap called CEX b)Place a sell or buy price order for coins within the DEX (decentralized exchange between users)
 11) If you place a buy order in the dex you cannot make a sell order, but you can cancel your order if there was no "matching" with another user.
 12) If you place a buy order in the dex you cannot make a sell order, but you can cancel your order if there was no "matching" with another user.
 the same thing is done with a sell order.

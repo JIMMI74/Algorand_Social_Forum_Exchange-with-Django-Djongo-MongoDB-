@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from coinmarketalgo.views import buyalgomkt, HomePrincipalView
+from coinmarketalgo.views import buyalgomkt, HomePrincipalView, sellcoinexchange
 from ordertransaction.views import placeOrders, activeOrders, gain_loss, order_status_book_view,\
     transaction_user, ListOrder, deleteOrder
 from django.conf.urls.static import static
@@ -29,6 +29,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('buycoin/', buyalgomkt, name='purchase'),
+    path('sellcoin/', sellcoinexchange, name='sell_exchange'),
     path('buy_sell_dex/', placeOrders, name='match_orders'),
     path('activeOrders/', activeOrders, name='activeOrders'),
     path('gain_loss/', gain_loss, name='gain_loss'),

@@ -9,7 +9,6 @@ from .models import PrincipalHome, SellCoinExchange
 
 
 
-
 def buyalgomkt(request):
     new_price = algoValue()
     if request.method == "POST":
@@ -22,18 +21,24 @@ def buyalgomkt(request):
                 form.instance.profile.USD_wallet > 0
                 and form.instance.max_spend_usd < form.instance.profile.USD_wallet
             ):
-                form.instance.purchased_coin = form.instance.max_spend_usd / new_price
-                buyer = Profile.objects.get(user=request.user)
-                buyer.ALGO_Wallet += form.instance.purchased_coin
-                buyer.USD_wallet -= form.instance.max_spend_usd
+                if form.instance.max_spend_usd > 0:
+                    form.instance.purchased_coin = form.instance.max_spend_usd / new_price
+                    form.instance.commission_exchange_buy = form.instance.purchased_coin * form.instance.comm_exchange_buy
+                    buyer = Profile.objects.get(user=request.user)
+                    buyer.ALGO_Wallet += form.instance.purchased_coin
+                    buyer.USD_wallet -= form.instance.max_spend_usd - form.instance.commission_exchange_buy
+                    print(str(form.instance.commission_exchange_buy) + "+" + str(buyer.USD_wallet))
 
-                form.save()
-                buyer.save()
-                messages.success(request, "Your purchase has been placed and processed")
+                    form.save()
+                    buyer.save()
+                    messages.success(request, f"Your purchase order has been sent to the exchange and processed,"
+                                     f" n ALGO you buy = {buyer.ALGO_Wallet} ALGO, net of commission. ")
+                else:
+                    messages.warning(request, "You do not have enough money or import is not correct!")
+                return redirect("purchase")
             else:
-                messages.warning(request, "You do not have enough money")
+                messages.warning(request, "You do not have enough money!")
             return redirect("purchase")
-
         else:
             return HttpResponseBadRequest()
 
@@ -43,6 +48,7 @@ def buyalgomkt(request):
     return render(
         request, "coinmarketalgo/purchase.html", {"form": form, "new_price": new_price}
     )
+
 
 
 

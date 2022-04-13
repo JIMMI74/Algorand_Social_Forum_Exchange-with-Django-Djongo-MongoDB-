@@ -68,7 +68,7 @@ def sellcoinexchange(request):
             ):
                 if form.instance.n_coin_sell > 0:
                     form.instance.sale_coin = form.instance.n_coin_sell * current_price_market
-                    form.instance.commission_exchange = form.instance.sale_coin * form.instance.comm_exchange
+                    form.instance.commission_exchange = form.instance.sale_coin * form.instance.comm_exchange_sell
                    
                     seller = Profile.objects.get(user=request.user)
                     seller.ALGO_Wallet -= form.instance.n_coin_sell

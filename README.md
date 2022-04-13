@@ -17,4 +17,4 @@ the same thing is done with a sell order.
 
 14)You can view the status of your order in the public status to check if it is open or concluded.
 
-15)You also have a personal profile to see all your DEX transactions and a wallet where you can check your gai / loss balance, number of coins and USD availability.
+15)You also have a personal profile to see all your DEX transactions and a wallet where you can check your gain / loss balance, number of coins and USD availability.

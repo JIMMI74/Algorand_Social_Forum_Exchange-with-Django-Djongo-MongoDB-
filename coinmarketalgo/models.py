@@ -21,7 +21,7 @@ class SellCoinExchange(models.Model):
     sell_price = models.FloatField(default=0)
     n_coin_sell = models.FloatField(default=0)
     datetime = models.DateTimeField(auto_now_add=True)
-    comm_exchange = models.FloatField(default=0.5 / 100)
+    comm_exchange_sell = models.FloatField(default=0.5 / 100)
     
     
     

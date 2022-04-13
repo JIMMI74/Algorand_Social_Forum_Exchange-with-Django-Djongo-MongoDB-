@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}{{ block.super }} - SellerCoinExchange{% endblock head_title %}
+{% block content %}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-6 text-center nio">
+        <h2>New Order Sell to Exchange -ALGO coin-</h2>
+        <form method="POST" novalidate>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input class="btn-danger" type="submit" value="Buy ALGO Coin">
+        </form>
+        <h2><strong>Current Price ALGO/USD ={{ current_price_market }}</strong></h2>
+        <h6>{{ profile.ALGO_Wallet }}</h6>
+    </div>
+ </div>
+<br><br>
+    <H3>Sales Commission = 0.5%</H3>
+
+{% endblock content %}

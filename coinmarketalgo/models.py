@@ -10,6 +10,7 @@ class Purchase(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     purchased_coin = models.FloatField(default=0)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='profile')
+    comm_exchange_buy = models.FloatField(default=1 / 100)
  
 
 

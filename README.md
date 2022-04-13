@@ -1,7 +1,7 @@
 # Algorand_Social_Forum_Exchange-with-MongoDB
 1) Install python 3.7/3.8/3.9
 2) install Mongodb Compass
-3) Create a virtual enviroment command .virtualenv
+3) Create a virtual enviroment command virtualenv .
 4) Install packages pip install -r requirements.txt
 5) After python manage.py runserver, go to admin and enter Ordermanager and enter a number(usually '0'),then click save
 6) The images of the homepage is left empty, just to insert the photos as you like and create a page as you see fit. It is sufficient to go to admin and PrincipalHome to add the photos from the PC or to take those displayed in the MEDIA folder.

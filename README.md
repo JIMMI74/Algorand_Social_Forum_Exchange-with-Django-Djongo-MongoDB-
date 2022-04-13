@@ -10,8 +10,8 @@
 9) After creating the discussion section, registered users will be able to comment and use it as a forum. The user also has his own social profile.
 10) a) You can buy and sell Algo using coinmarketcap called CEX b)Place a sell or buy price order for coins within the DEX (decentralized exchange between users)
 11) If you place a buy order in the dex you cannot make a sell order, but you can cancel your order if there was no "matching" with another user.
-12) If you place a buy order in the dex you cannot make a sell order, but you can cancel your order if there was no "matching" with another user.
+12) If you place a buy order in the dex you cannot make a sell order, but you can cancel your order if there was no "matching" with another user
 the same thing is done with a sell order.
-12)If you have placed a buy order, you can place subsequent orders at a price equal to or higher than the first order entered.
-13)You can view the status of your order in the public status to check if it is open or concluded.
-14)You also have a personal profile to see all your DEX transactions and a wallet where you can check your gai / loss balance, number of coins and USD availability.
+13)If you have placed a buy order, you can place subsequent orders at a price equal to or higher than the first order entered.
+14)You can view the status of your order in the public status to check if it is open or concluded.
+15)You also have a personal profile to see all your DEX transactions and a wallet where you can check your gai / loss balance, number of coins and USD availability.

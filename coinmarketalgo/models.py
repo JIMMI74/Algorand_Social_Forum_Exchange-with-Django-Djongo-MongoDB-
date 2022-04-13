@@ -10,9 +10,20 @@ class Purchase(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     purchased_coin = models.FloatField(default=0)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='profile')
+ 
 
 
-
+class SellCoinExchange(models.Model):
+    _id = ObjectIdField()    
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    sale_coin = models.FloatField(default=0)
+    sell_price = models.FloatField(default=0)
+    n_coin_sell = models.FloatField(default=0)
+    datetime = models.DateTimeField(auto_now_add=True)
+    comm_exchange = models.FloatField(default=0.5 / 100)
+    
+    
+    
 class PrincipalHome(models.Model):
     title_principal = models.CharField(max_length=150)
     sub_title = models.CharField(max_length=150, blank=True, null=True)

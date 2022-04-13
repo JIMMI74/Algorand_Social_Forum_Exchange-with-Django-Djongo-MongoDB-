@@ -14,11 +14,12 @@ class PurchaseForm(forms.ModelForm):
         
         
         
- class SaleCoin(forms.ModelForm):
+class SaleCoin(forms.ModelForm):
     current_price_market = algoValue()
 
     class Meta:
         model = SellCoinExchange
         fields = ['n_coin_sell']
         labels = {"n_coin_sell": "Enter the number of coins you wish to sell"}
+
 

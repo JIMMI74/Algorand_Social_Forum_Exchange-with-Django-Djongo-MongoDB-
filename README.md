@@ -12,6 +12,9 @@
 11) If you place a buy order in the dex you cannot make a sell order, but you can cancel your order if there was no "matching" with another user.
 12) If you place a buy order in the dex you cannot make a sell order, but you can cancel your order if there was no "matching" with another user
 the same thing is done with a sell order.
+
 13)If you have placed a buy order, you can place subsequent orders at a price equal to or higher than the first order entered.
+
 14)You can view the status of your order in the public status to check if it is open or concluded.
+
 15)You also have a personal profile to see all your DEX transactions and a wallet where you can check your gai / loss balance, number of coins and USD availability.

@@ -10,6 +10,7 @@ class PurchaseForm(forms.ModelForm):
     class Meta:
         model = Purchase
         fields = ['max_spend_usd']
+        labels = {"max_spend_usd": "Enter the number of coins you wish to purchase"}
         
         
         
@@ -19,4 +20,5 @@ class PurchaseForm(forms.ModelForm):
     class Meta:
         model = SellCoinExchange
         fields = ['n_coin_sell']
+        labels = {"n_coin_sell": "Enter the number of coins you wish to sell"}
 

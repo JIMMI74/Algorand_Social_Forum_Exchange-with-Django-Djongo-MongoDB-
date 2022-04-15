@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block head_title %}{{ block.super }} - {{ user }}{% endblock head_title %}
+{% block content %}
+
+<div class="row mt-3">
+    <div class="col-sm-4"></div>
+        <div class="card my-3">
+            <div class="card-header bg-success">
+                <h4>( CEX ) List Price Purchase from Conimarketcap</h4><u>{{ user}}</u>
+            </div>
+            <div class="card-body">
+                <div class="card-body">
+                    <p>{% if request.user == user %}<h5><strong>-Number Purchase =[{{ purchases.count }}]<br><br></strong></h5> {% endif %}</p>
+                    <h5><u>Average Price</u></h5><span class="badge badge-secondary badge bg-info"><h5><strong>{{ avg_price }}</strong></h5></span>
+                     <hr>
+                        {% for coin in purchases %}
+                    <span><H5>°{{ coin.datetime }}</h5></span>
+                    <p><strong>- Price = [{{ coin.purchased_price  }}] Coins Purchased =[{{ coin.purchased_coin }}]</strong></p>
+                        {% endfor %}
+                 <div class="card-footer bg-primary"></div>
+            </div>
+        </div>
+     </div>
+</div>
+<span class="badge badge-secondary badge bg-danger"><h3><u>AVERAGE LOAD PRICE</u> = [{{ total_average_price_coin }}]</h3></span>
+<div class="row mt-3">
+    <div class="col-sm-4"></div>
+        <div class="card my-3">
+            <div class="card-header bg-success">
+                <h4>( DEX ) Price list from closed transactions between users</h4><u>{{ user}}</u>
+            </div>
+            <div class="card-body">
+                <div class="card-body">
+                     <hr>
+                        <p>{% if request.user == user %}<h5><strong>-Number Transaction closed  =[{{ transactions.count }}]<br><br></strong></h5>{% endif %}</p>
+                        <h5><u>Average Price</u></h5><span class="badge badge-secondary badge bg-info"><h5><strong>{{ avg_price_tr }}</strong></h5></span>
+                         <hr>
+                        {% for coins in transactions %}
+                        <span><H5>°{{ coins.datetime|date:"M d Y H:m:s" }}</h5></span>
+                            {% if coins.call == request.user %}
+                        <p><strong>-Price = [{{ coins.price }}] Coins Purchased = [{{ coins.quantity }}]</strong></p>
+                        {% endif %}
+                        {% endfor %}
+                 <div class="card-footer bg-primary"></div>
+            </div>
+        </div>
+     </div>
+</div>
+{% endblock content %}

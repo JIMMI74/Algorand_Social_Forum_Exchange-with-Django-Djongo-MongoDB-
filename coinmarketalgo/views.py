@@ -101,7 +101,6 @@ def sellcoinexchange(request):
         request, "coinmarketalgo/sell_exchange.html", {"form": form, "current_price_market": current_price_market}
     )
 
-
 def list_price_average(request, username):
     user = get_object_or_404(User, username=username)
     profile = Profile.objects.get(user=user)
@@ -115,10 +114,15 @@ def list_price_average(request, username):
        sum_ctv += purchase.purchased_price * purchase.purchased_coin
        total_coin_purchase += purchase.purchased_coin
 
+    
     print(sum_ctv)
     print(len(purchases))
     print(total_coin_purchase)
-    avg_price = sum_ctv / total_coin_purchase
+    try:
+        avg_price = sum_ctv / total_coin_purchase
+                                                            
+    except ZeroDivisionError:
+        avg_price = 0
     print(avg_price)
 
     sum_ctv_tr = 0
@@ -131,7 +135,10 @@ def list_price_average(request, username):
     print(sum_ctv_tr)
     print(total_coin_quantity)
     print(profile)
-    avg_price_tr = sum_ctv_tr / total_coin_quantity
+    try:
+        avg_price_tr = sum_ctv_tr / total_coin_quantity
+    except ZeroDivisionError:
+        avg_price_tr = 0
     print(avg_price_tr)
 
     total_average_price_coin = (avg_price + avg_price_tr) / 2
@@ -142,6 +149,7 @@ def list_price_average(request, username):
                'total_average_price_coin': total_average_price_coin}
     return render(request, 'coinmarketalgo/total_average_price_coin.html', context)
     
+
 
 
 def HomePrincipalView(request):

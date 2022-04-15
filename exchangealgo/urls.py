@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from coinmarketalgo.views import buyalgomkt, HomePrincipalView, sellcoinexchange
+from coinmarketalgo.views import buyalgomkt, HomePrincipalView, sellcoinexchange, list_price_average
 from ordertransaction.views import placeOrders, activeOrders, gain_loss, order_status_book_view,\
     transaction_user, ListOrder, deleteOrder
 from django.conf.urls.static import static
@@ -38,7 +38,8 @@ urlpatterns = [
     path('forum/', include('forum.urls')),
     path('', HomePrincipalView, name='homepage'),
     path('status/', ListOrder.as_view(), name='status'),
-    path('status/<int:n>/remove', deleteOrder, name="delete_orders")
+    path('status/<int:n>/remove', deleteOrder, name="delete_orders"),
+    path('price/<str:username>/', list_price_average, name='total_average_price_coin'),
 ]
 
 if settings.DEBUG:

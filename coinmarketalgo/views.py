@@ -1,10 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from accounts.coinmarketcap import algoValue
 from .forms import PurchaseForm, SaleCoin
 from django.contrib import messages
 from accounts.models import Profile
 from django.http import HttpResponseBadRequest
-from .models import PrincipalHome, SellCoinExchange
+from .models import PrincipalHome, SellCoinExchange, Purchase
+from django.db.models import Sum
+from django.contrib.auth.models import User
+from ordertransaction.models import Order, Transaction
 
 
 
@@ -99,6 +102,46 @@ def sellcoinexchange(request):
     )
 
 
+def list_price_average(request, username):
+    user = get_object_or_404(User, username=username)
+    profile = Profile.objects.get(user=user)
+    purchases = Purchase.objects.filter(profile=profile).order_by('-datetime')
+    orders = Order.objects.filter(profile=profile).order_by('-datetime')
+    transactions = Transaction.objects.filter(call=request.user).order_by('-datetime')
+    sum_ctv = 0
+    total_coin_purchase = 0
+
+    for purchase in purchases:
+       sum_ctv += purchase.purchased_price * purchase.purchased_coin
+       total_coin_purchase += purchase.purchased_coin
+
+    print(sum_ctv)
+    print(len(purchases))
+    print(total_coin_purchase)
+    avg_price = sum_ctv / total_coin_purchase
+    print(avg_price)
+
+    sum_ctv_tr = 0
+    total_coin_quantity = 0
+
+    for transaction in transactions:
+        sum_ctv_tr += (transaction.price * transaction.quantity)
+        total_coin_quantity += transaction.quantity
+
+    print(sum_ctv_tr)
+    print(total_coin_quantity)
+    print(profile)
+    avg_price_tr = sum_ctv_tr / total_coin_quantity
+    print(avg_price_tr)
+
+    total_average_price_coin = (avg_price + avg_price_tr) / 2
+    print(total_average_price_coin)
+
+    context = {'user': user, 'profile': profile, 'purchases': purchases,
+               'orders': orders, 'transactions': transactions, 'avg_price': avg_price, 'avg_price_tr': avg_price_tr,
+               'total_average_price_coin': total_average_price_coin}
+    return render(request, 'coinmarketalgo/total_average_price_coin.html', context)
+    
 
 
 def HomePrincipalView(request):

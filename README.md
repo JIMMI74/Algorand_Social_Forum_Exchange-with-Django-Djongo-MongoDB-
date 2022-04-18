@@ -5,9 +5,10 @@ As a student,the aim was to create a Lightning Network, where the user buys coin
 
 1) Install python 3.7/3.8/3.9
 2) install Mongodb Compass
-3) Create a virtual enviroment command (virtualenv .)then (.  bin/activate) with MAC
-5) Install packages pip install -r requirements.txt
-6) After python manage.py runserver, go to admin and enter Ordermanager and enter a number(usually '0'),then click save
+3) Click cd  Algorand_Social_Forum_Exchange.......or If you wants create a virtual enviroment command (virtualenv .)then (.  bin/activate) with MAC
+4) Install packages pip install -r requirements.txt
+5) Click python manage.py runserver
+6) Then you have to go in ADMIN and enter Ordermanager and enter a number(usually '0'),then click save
 7) The images of the homepage is left empty, just to insert the photos as you like and create a page as you see fit. It is sufficient to go to admin and PrincipalHome to add the photos from the PC or to take those displayed in the MEDIA folder.
 8) If you are the admin you can go to the social page and create a section for users to discuss.
 9) After registering, you are automatically assigned ALGO coins and 10,000 USD which you can view in your wallet.

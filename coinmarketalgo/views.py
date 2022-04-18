@@ -157,6 +157,8 @@ def list_price_average(request, username):
     purchases = Purchase.objects.filter(profile=profile).order_by('-datetime')
     orders = Order.objects.filter(profile=profile).order_by('-datetime')
     transactions = Transaction.objects.filter(call=request.user).order_by('-datetime')
+    orders_seller = SellCoinExchange.objects.filter(profile=profile).order_by('-datetime')
+    
     sum_ctv = 0
     total_coin_purchase = 0
 
@@ -196,7 +198,7 @@ def list_price_average(request, username):
 
     context = {'user': user, 'profile': profile, 'purchases': purchases,
                'orders': orders, 'transactions': transactions, 'avg_price': avg_price, 'avg_price_tr': avg_price_tr,
-               'total_average_price_coin': total_average_price_coin}
+               'total_average_price_coin': total_average_price_coin, 'orders_seller': orders_seller}
     return render(request, 'coinmarketalgo/total_average_price_coin.html', context)
     
 

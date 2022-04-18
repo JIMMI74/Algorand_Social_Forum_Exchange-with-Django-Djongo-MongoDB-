@@ -1,6 +1,6 @@
 # Algorand_Social_Forum_Exchange-with-MongoDB
 
-As a student,the purpose was to create a Lightning Network, where the user buys coins from the centralized exchange paying commissions, but then, can exchange the coins or sell them or buy them from other users without commissions, and then sell them back to the centralized system, always looking for a 'possible profit.
+As a student,the aim was to create a Lightning Network, where the user buys coins from the centralized exchange paying commissions, but then, can exchange the coins or sell them or buy them from other users without commissions, and then sell them back to the centralized system, always looking for a 'possible profit.
 
 
 1) Install python 3.7/3.8/3.9

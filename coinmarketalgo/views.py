@@ -5,10 +5,10 @@ from django.contrib import messages
 from accounts.models import Profile
 from django.http import HttpResponseBadRequest
 from .models import PrincipalHome, SellCoinExchange, Purchase
-from django.db.models import Sum
+from django.db.models import Avg, Max, Min, Sum
 from django.contrib.auth.models import User
 from ordertransaction.models import Order, Transaction
-
+import math
 
 
 
@@ -30,12 +30,13 @@ def buyalgomkt(request):
                     buyer = Profile.objects.get(user=request.user)
                     buyer.ALGO_Wallet += form.instance.purchased_coin
                     buyer.USD_wallet -= form.instance.max_spend_usd - form.instance.commission_exchange_buy
-                    print(str(form.instance.commission_exchange_buy) + "+" + str(buyer.USD_wallet))
+                    print('Commission = ', str(form.instance.commission_exchange_buy) + ", USD_wallet net commission = " + str(buyer.USD_wallet))
 
                     form.save()
                     buyer.save()
                     messages.success(request, f"Your purchase order has been sent to the exchange and processed,"
-                                     f" n ALGO you buy = {buyer.ALGO_Wallet} ALGO, net of commission. ")
+                                     f" n ALGO you buy = {buyer.ALGO_Wallet} ALGO, net of commission {form.instance.commission_exchange_buy} USD")
+                    messages.success(request, f"Total Coin Purchased {buyer.ALGO_Wallet} ALGO")
                 else:
                     messages.warning(request, "You do not have enough money or import is not correct!")
                 return redirect("purchase")
@@ -53,11 +54,11 @@ def buyalgomkt(request):
     )
 
 
-
-
-
-
 def sellcoinexchange(request):
+    ctv_sum_purchase = 0
+    total_bought_coin_purchase = 0
+    ctv_sum_transaction = 0
+    total_bought_coin_transaction = 0
     current_price_market = algoValue()
     if request.method == "POST":
         form = SaleCoin(request.POST)
@@ -74,14 +75,58 @@ def sellcoinexchange(request):
                     form.instance.commission_exchange = form.instance.sale_coin * form.instance.comm_exchange_sell
                    
                     seller = Profile.objects.get(user=request.user)
+                    coin_bought_purchase = Purchase.objects.filter(profile=form.instance.profile)
+                    coin_bought_transaction = Transaction.objects.filter(call_id=request.user)
+                    print(coin_bought_purchase)
+                    print(coin_bought_transaction)
+                    for orders in coin_bought_purchase:
+                        ctv_sum_purchase += orders.purchased_price * orders.purchased_coin
+                        print(ctv_sum_purchase)
+                        total_bought_coin_purchase += orders.purchased_coin
+                    try:
+                        avg_price_orders_seller = ctv_sum_purchase / total_bought_coin_purchase     # 1)  average price Purchase
+                    except ZeroDivisionError:
+                        avg_price_orders_seller = 0
+
+                    print('Average Price Orders Seller =', avg_price_orders_seller)
+                    avg_orders = avg_price_orders_seller
+
+                    for transactions in coin_bought_transaction:
+                        ctv_sum_transaction += transactions.price * transactions.quantity
+                        print(ctv_sum_transaction)
+                        total_bought_coin_transaction += transactions.quantity
+                    try:
+                        avg_price_transactions_seller = ctv_sum_transaction / total_bought_coin_transaction    #) 2 avergare price Transaction
+                    except ZeroDivisionError:
+                        avg_price_transactions_seller = 0
+                    print('Average Price Seller =', avg_price_transactions_seller)
+                    avg_transactions = avg_price_transactions_seller
+
+                    total_avg_price_seller = (avg_transactions + avg_orders) / 2          # 3) arithmetic mean of the two averages
+                    print('Total Average Loading Price =', total_avg_price_seller)
+
+                    
+                    ctv_n_coin_sell_loading_price = (form.instance.n_coin_sell * total_avg_price_seller)     # 4) loading price of coins for sale
+                    print('Ctv nCoin in Sell * Avg Loading Price', str(ctv_n_coin_sell_loading_price) + "= (nCoin Sell) =" + str(form.instance.n_coin_sell) + " * (Average Price to charge)" + str(total_avg_price_seller))
+
+                    gain_loss_exchange = form.instance.sale_coin - ctv_n_coin_sell_loading_price
+                    print('Gain/Loss', str(gain_loss_exchange) + "= CTV nCoin Sell" + str(form.instance.sale_coin) + " - nCoin in Sell =" + str(form.instance.n_coin_sell) + " * Average Loading Price =" + str(total_avg_price_seller))
+
+                    form.instance.net_profit = gain_loss_exchange - form.instance.commission_exchange
+                    print('Net Profit', str(form.instance.net_profit) + "= Gain Loss " + str(gain_loss_exchange) + "- Commission Exchange =" + str(form.instance.commission_exchange))
+
                     seller.ALGO_Wallet -= form.instance.n_coin_sell
                     seller.USD_wallet += form.instance.sale_coin - form.instance.commission_exchange
-                    print(str(form.instance.commission_exchange) + "+" + str(seller.USD_wallet))
+                    seller.profit += form.instance.net_profit
+                    print('USD Wallet', str(seller.USD_wallet) + '+ Sale Coin ' + str(form.instance.sale_coin) + ' - Commission Exchange =', str(form.instance.commission_exchange))
+
                     form.save()
                     seller.save()
                     messages.success(request,
                                      f"Your sales order has been sent to the exchange and processed,"
-                                     f" sales value = {seller.USD_wallet} USD, net of commission. ")
+                                     f" sales value = {seller.USD_wallet} USD, net of commission. "
+                                     f"Your Gain/Loss has been of {gain_loss_exchange}USD")
+                    messages.success(request,f'Now your net profit is {form.instance.net_profit}USD')
 
                 else:
                     messages.warning(request, "Attention enter a correct value please! ")
@@ -100,6 +145,11 @@ def sellcoinexchange(request):
     return render(
         request, "coinmarketalgo/sell_exchange.html", {"form": form, "current_price_market": current_price_market}
     )
+
+
+
+
+
 
 def list_price_average(request, username):
     user = get_object_or_404(User, username=username)

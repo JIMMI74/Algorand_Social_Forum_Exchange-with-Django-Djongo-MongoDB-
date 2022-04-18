@@ -47,4 +47,27 @@
         </div>
      </div>
 </div>
+<div class="row mt-3">
+    <div class="col-sm-4"></div>
+        <div class="card my-3">
+            <div class="card-header bg-success">
+                <h4>Sales order list to Exchange</h4><u>{{ user}}</u>
+            </div>
+            <div class="card-body">
+                <div class="card-body">
+                     <hr>
+                        <p>{% if request.user == user %}<h5><strong>-Number of sales orders  =[{{ orders_seller.count }}]<br><br></strong></h5>{% endif %}</p>
+                        <h5><u>Average Price</u></h5><span class="badge badge-secondary badge bg-info"><h5><strong>{{ total_average_price_coin  }}</strong></h5></span>
+                         <hr>
+                        {% for seller in orders_seller %}
+                        <span><H5>°{{ seller.datetime|date:"M d Y H:m:s" }}</h5></span>
+
+                        <p><strong>-Price = [{{ seller.sell_price }}] Coins Purchased = [{{ seller.n_coin_sell }}] Total = {{ seller.sale_coin}}</strong></p>
+
+                        {% endfor %}
+                 <div class="card-footer bg-primary"></div>
+            </div>
+        </div>
+     </div>
+</div>
 {% endblock content %}

@@ -18,7 +18,13 @@ the same thing is done with a sell order.
 14)You can view the status of your order in the public status to check if it is open or concluded.
 
 15)You also have a personal profile to see all your DEX transactions or CEX a wallet where you can check your gain / loss balance, number of coins and USD availability.
+
 16) when you want to buy coins from coinmarketcap you pay a 1% commission, while when you want to sell on the Exchange the commission is reduced to 0.5%.
+
 17) The sale on the Exchange is calculated taking into consideration the weighted average of the purchases in Cex and the weighted average of the purchases in DEX.
+
 18) The arithmetic average between the two will be the "average charged price" used for the sale and for the realization of your gain or loss.
+
 19) At the moment the profit follows a FloatField field, but it will be changed to a decimal, to make it more precise.
+
+20)

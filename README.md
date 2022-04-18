@@ -28,7 +28,7 @@ the same thing is done with a sell order.
 
 17) The sale on the Exchange is calculated taking into consideration the weighted average of the purchases in Cex and the weighted average of the purchases in DEX.
 
-18) The arithmetic average between the two will be the "average charged price" used for the sale and for the realization of your gain or loss.
+18) The arithmetic average between the two will be the "average loading price" used for the sale and for the realization of your gain or loss.
 
 19) At the moment the profit follows a FloatField field, but it will be changed to a decimal, to make it more precise.
 

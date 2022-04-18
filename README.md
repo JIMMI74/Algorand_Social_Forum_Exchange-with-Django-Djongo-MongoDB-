@@ -27,4 +27,3 @@ the same thing is done with a sell order.
 
 19) At the moment the profit follows a FloatField field, but it will be changed to a decimal, to make it more precise.
 
-20)

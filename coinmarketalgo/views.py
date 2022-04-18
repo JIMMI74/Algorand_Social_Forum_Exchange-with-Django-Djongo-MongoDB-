@@ -35,8 +35,8 @@ def buyalgomkt(request):
                     form.save()
                     buyer.save()
                     messages.success(request, f"Your purchase order has been sent to the exchange and processed,"
-                                     f" n ALGO you buy = {buyer.ALGO_Wallet} ALGO, net of commission {form.instance.commission_exchange_buy} USD")
-                    messages.success(request, f"Total Coin Purchased {buyer.ALGO_Wallet} ALGO")
+                                     f" n ALGO you buy = {buyer.ALGO_Wallet} ALGO, net of commission of {form.instance.commission_exchange_buy} USD")
+                    messages.success(request, f"Total Coin Purchased = {buyer.ALGO_Wallet} ALGO")
                 else:
                     messages.warning(request, "You do not have enough money or import is not correct!")
                 return redirect("purchase")

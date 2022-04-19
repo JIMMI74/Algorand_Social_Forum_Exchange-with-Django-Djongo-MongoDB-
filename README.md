@@ -11,7 +11,7 @@ As a student,the aim was to create a Lightning Network, where the user buys coin
 6) Then you have to go in ADMIN and enter Ordermanager and enter a number(usually '0'),then click save
 7) The images of the homepage is left empty, just to insert the photos as you like and create a page as you see fit. It is sufficient to go to admin and PrincipalHome to add the photos from the PC or to take those displayed in the MEDIA folder.
 8) If you are the admin you can go to the social page and create a section for users to discuss.
-9) After registering, you are automatically assigned ALGO coins and 10,000 USD which you can view in your wallet.
+9) After registering, you are automatically assigned ALGO coins and 1.000 USD which you can view in your wallet.
 10) After creating the discussion section, registered users will be able to comment and use it as a forum. The user also has his own social profile.
 11) a) You can buy and sell Algo using coinmarketcap called CEX b)Place a sell or buy price order for coins within the DEX (decentralized exchange between users)
 12) If you place a buy order in the dex you cannot make a sell order, but you can cancel your order if there was no "matching" with another user.

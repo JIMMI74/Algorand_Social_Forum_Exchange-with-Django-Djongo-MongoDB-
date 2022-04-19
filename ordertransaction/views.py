@@ -61,7 +61,7 @@ def placeOrders(request):
                 messages.warning(request,
                                  "Attention, order cannot be processed, you already have an open order pending in BUY!")
                 return redirect('/buy_sell_dex/')
-                                                            # altrimenti procedo con la verifica di altri ordini open nella stessa posizione
+                                                            # otherwise I proceed wiyh the verification of other open orders in the same position
             elif open_status_sellers.count() > 0:
                 high_price = None
                 for order in open_status_sellers:

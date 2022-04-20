@@ -28,7 +28,7 @@ the same thing is done with a sell order.
 
 18) The sale on the Exchange is calculated taking into consideration the weighted average of the purchases in Cex and the weighted average of the purchases in DEX.
 
-19) The arithmetic average between the two will be the "average loading price" used for the sale and for the realization of your gain or loss.
+19) The arithmetic average between the two will be the "average loading price" used for selling to Coinmarketcap and for the realization of your gain or loss.
 
 20) At the moment the profit follows a FloatField field, but it will be changed to a decimal, to make it more precise.
 

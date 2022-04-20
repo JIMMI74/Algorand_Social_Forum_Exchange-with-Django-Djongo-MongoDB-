@@ -5,7 +5,7 @@ As a student,the aim was to create a Lightning Network, where the user buys coin
 
 1) Install python 3.7/3.8/3.9
 2) install Mongodb Compass
-3) Click cd  Algorand_Social_Forum_Exchange.......or If you wants create a virtual enviroment command (virtualenv .)then (.  bin/activate) with MAC
+3) Click cd  Algorand_Social_Forum_Exchange.......or If you wish to create a virtual enviroment, you can do it with the command (virtualenv .)then (.  bin/activate) with MAC
 4) Install packages pip install -r requirements.txt
 5) Click python manage.py runserver
 6) Then you have to go in ADMIN and enter Ordermanager and enter a number(usually '0'),then click save
@@ -18,17 +18,17 @@ As a student,the aim was to create a Lightning Network, where the user buys coin
 13) If you place a buy order in the dex you cannot make a sell order, but you can cancel your order if there was no "matching" with another user
 the same thing is done with a sell order.
 
-13)If you have placed a buy order, you can place subsequent orders at a price equal to or higher than the first order entered.
+14)If you have placed a buy order, you can place subsequent orders at a price equal to or higher than the first order entered.
 
-14)You can view the status of your order in the public status to check if it is open or concluded.
+15)You can view the status of your order in the public status to check if it is open or concluded.
 
-15)You also have a personal profile to see all your DEX transactions or CEX a wallet where you can check your gain / loss balance, number of coins and USD availability.
+16)You also have a personal profile to see all your DEX transactions or CEX a wallet where you can check your gain / loss balance, number of coins and USD availability.
 
-16) when you want to buy coins from coinmarketcap you pay a 1% commission, while when you want to sell on the Exchange the commission is reduced to 0.5%.
+17) when you want to buy coins from coinmarketcap you pay a 1% commission, while when you want to sell on the Exchange the commission is reduced to 0.5%.
 
-17) The sale on the Exchange is calculated taking into consideration the weighted average of the purchases in Cex and the weighted average of the purchases in DEX.
+18) The sale on the Exchange is calculated taking into consideration the weighted average of the purchases in Cex and the weighted average of the purchases in DEX.
 
-18) The arithmetic average between the two will be the "average loading price" used for the sale and for the realization of your gain or loss.
+19) The arithmetic average between the two will be the "average loading price" used for the sale and for the realization of your gain or loss.
 
-19) At the moment the profit follows a FloatField field, but it will be changed to a decimal, to make it more precise.
+20) At the moment the profit follows a FloatField field, but it will be changed to a decimal, to make it more precise.
 

@@ -172,22 +172,21 @@ def sellcoinexchange(request):
                         avg_transactions = avg_price_transactions_seller
 
                         try:
-                            Total_Avg_price_charge = (avg_transactions + avg_orders) / (total_bought_coin_transaction + total_bought_coin_purchase)  # 2) Totale Average price in charged in your wallet
+                            total_Avg_price_charge = (avg_transactions + avg_orders) / (total_bought_coin_transaction + total_bought_coin_purchase)  # 2) Totale Average price in charged in your wallet
                         except ZeroDivisionError:
-                            Total_Avg_price_charge = 0
-                            
-                        print('TOTAL Average Loading Price', str(Total_Avg_price_charge))
-
+                            total_Avg_price_charge = 0                        
+                        print('Total Average Loading Price', str(total_Avg_price_charge))
+                        total_avg_prices_charge = total_Avg_price_charge
                         # total_avg_price_seller = (avg_transactions + avg_orders) / 2          # 3) arithmetic mean of the two averages
                         # print('Total Average Loading Price =', total_avg_price_seller)
 
 
-                        ctv_n_coin_sell_loading_price = (form.instance.n_coin_sell * Total_Avg_price_charge)     # 4) loading price of coins for sale
+                        ctv_n_coin_sell_loading_price = (form.instance.n_coin_sell * total_avg_prices_charge)     # 4) loading price of coins for sale
 
-                        print('Ctv nCoin in Sell * Avg Loading Price', str(ctv_n_coin_sell_loading_price) + "= (nCoin Sell) =" + str(form.instance.n_coin_sell) + " * (Average Price to charge)" + str(Total_Avg_price_charge))
+                        print('Ctv nCoin in Sell * Avg Loading Price', str(ctv_n_coin_sell_loading_price) + "= (nCoin Sell) =" + str(form.instance.n_coin_sell) + " * (Average Price to charge)" + str(total_avg_prices_charge))
 
                         gain_loss_exchange = form.instance.sale_coin - ctv_n_coin_sell_loading_price
-                        print('Gain/Loss', str(gain_loss_exchange) + "= CTV nCoin Sell" + str(form.instance.sale_coin) + " - nCoin in Sell =" + str(form.instance.n_coin_sell) + " * Average Loading Price =" + str(Total_Avg_price_charge))
+                        print('Gain/Loss', str(gain_loss_exchange) + "= CTV nCoin Sell" + str(form.instance.sale_coin) + " - nCoin in Sell =" + str(form.instance.n_coin_sell) + " * Average Loading Price =" + str(total_avg_prices_charge))
 
                         form.instance.net_profit = gain_loss_exchange - form.instance.commission_exchange
                         print('Net Profit', str(form.instance.net_profit) + "= Gain Loss " + str(gain_loss_exchange) + "- Commission Exchange =" + str(form.instance.commission_exchange))
@@ -261,23 +260,23 @@ def sellcoinexchange(request):
                                 avg_price_transactions_seller = 0
                             print('Average Price Seller =', avg_price_transactions_seller)
                             avg_transactions = avg_price_transactions_seller
-                            
+
                             try:
                                 tot_Avg_price_charge = (avg_transactions + avg_orders) / (total_bought_coin_transaction + total_bought_coin_purchase)  # 2) Total Average price in charged in your wallet
                             except ZeroDivisionError:
                                 tot_Avg_price_charge = 0
-
-                            print('TOTAL Average Loading Price', str(tot_Avg_price_charge ))
+                            print('Total Average Loading Price', str(tot_Avg_price_charge))
+                            total_avg_price_charge = tot_Avg_price_charge
 
                             # total_avg_price_seller = (avg_transactions + avg_orders) / 2          # 3) arithmetic mean of the two averages
                             # print('Total Average Loading Price =', total_avg_price_seller)
 
 
-                            ctv_n_coin_sell_loading_price = (form.instance.n_coin_sell * tot_Avg_price_charge)     # 4) loading price of coins for sale
-                            print('Ctv nCoin in Sell * Avg Loading Price', str(ctv_n_coin_sell_loading_price) + "= (nCoin Sell) =" + str(form.instance.n_coin_sell) + " * (Average Price to charge)" + str(tot_Avg_price_charge))
+                            ctv_n_coin_sell_loading_price = (form.instance.n_coin_sell * total_avg_price_charge)     # 4) loading price of coins for sale
+                            print('Ctv nCoin in Sell * Avg Loading Price', str(ctv_n_coin_sell_loading_price) + "= (nCoin Sell) =" + str(form.instance.n_coin_sell) + " * (Average Price to charge)" + str(total_avg_price_charge))
 
                             gain_loss_exchange = form.instance.sale_coin - ctv_n_coin_sell_loading_price
-                            print('Gain/Loss', str(gain_loss_exchange) + "= CTV nCoin Sell" + str(form.instance.sale_coin) + " - nCoin in Sell =" + str(form.instance.n_coin_sell) + " * Average Loading Price =" + str(tot_Avg_price_charge))
+                            print('Gain/Loss', str(gain_loss_exchange) + "= CTV nCoin Sell" + str(form.instance.sale_coin) + " - nCoin in Sell =" + str(form.instance.n_coin_sell) + " * Average Loading Price =" + str(total_avg_price_charge))
 
                             form.instance.net_profit = gain_loss_exchange - form.instance.commission_exchange
                             print('Net Profit', str(form.instance.net_profit) + "= Gain Loss " + str(gain_loss_exchange) + "- Commission Exchange =" + str(form.instance.commission_exchange))

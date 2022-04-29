@@ -220,7 +220,7 @@ def sellcoinexchange(request):
                     if form.instance.n_coin_sell > 0:
                         form.instance.price_market = current_price_market
                         print('price_market', str(form.instance.price_market))
-                        print('verify new price', str(current_price_market))
+                        print('current_price_market', str(current_price_market))
                         high_limit = form.instance.price_market * 0.1
                         print('high_limit', str(high_limit))
                         margin_limit = current_price_market + high_limit

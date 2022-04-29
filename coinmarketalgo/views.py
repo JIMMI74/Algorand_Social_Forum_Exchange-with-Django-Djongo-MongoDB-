@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from ordertransaction.models import Order, Transaction
 import math
 
+
 def buyalgomkt(request):
     current_price = algoValue()
     if request.method == "POST":
@@ -32,18 +33,14 @@ def buyalgomkt(request):
                             form.instance.purchased_coin = 0
                         print('Tot_coin', str(form.instance.purchased_coin) + "Expense =" + str(form.instance.max_spend_usd) + "Price=" +str(new_price))
                         commission_exchange_buy = form.instance.purchased_coin * form.instance.comm_exchange_buy
-
-
                         buyer = Profile.objects.get(user=request.user)
                         buyer.ALGO_Wallet += form.instance.purchased_coin
                         print('Buyer', str(buyer.ALGO_Wallet))
                         total_spend = form.instance.max_spend_usd + commission_exchange_buy
                         max_spend = buyer.USD_wallet - commission_exchange_buy
                         if buyer.USD_wallet > form.instance.max_spend_usd + commission_exchange_buy:
-
                             buyer.USD_wallet -= form.instance.max_spend_usd + commission_exchange_buy
                             print('Commission = ', str(commission_exchange_buy) + ", USD_wallet net commission = " + str(buyer.USD_wallet))
-
                             form.save()
                             buyer.save()
                             messages.success(request, f"Your purchase order has been sent to the exchange and processed,"
@@ -55,9 +52,6 @@ def buyalgomkt(request):
                                              'Attention! it is not possible to proceed, the purchase net of commissions would result in a negative balance!, reload the page.')
                             messages.warning(request,
                                              f'You would pay a total of {total_spend} $ USD, over your availability which is ({buyer.USD_wallet}) $ USD, You can spend maximum {max_spend} $ USD, leaving a positive balance')
-
-
-
                     else:
                         messages.warning(request, "You do not have enough money or import is not correct or the Price must be the MARKET PRICE ! Please, reload the page.")
                     return redirect("purchase")
@@ -74,12 +68,13 @@ def buyalgomkt(request):
                         form.instance.price_market = current_price
                         print('price_market', str(form.instance.price_market))
                         print('verify new price', str(new_price))
-
                         lower_limit = form.instance.price_market * 0.9
-                        print('LIMIT', str(lower_limit))
-
+                        print('LIMIT', str(lower_limit))                        
                         if form.instance.purchased_price <= form.instance.price_market and form.instance.purchased_price >= lower_limit:
-                            form.instance.purchased_coin = form.instance.max_spend_usd / form.instance.purchased_price
+                            try:
+                                form.instance.purchased_coin = form.instance.max_spend_usd / form.instance.purchased_price
+                            except ZeroDivisionError:
+                                form.instance.purchased_coin = 0
                             print('Purchased_coin', str(form.instance.purchased_coin) + "Quantity =" + str(form.instance.max_spend_usd) + "Price=" + str(form.instance.purchased_price))
                             commission_exchange_buy = form.instance.purchased_coin * form.instance.comm_exchange_buy
                             print('Commission', str(commission_exchange_buy))
@@ -118,6 +113,7 @@ def buyalgomkt(request):
     return render(
             request, "coinmarketalgo/purchase.html", {"form": form, "current_price": current_price}
         )
+
 
 
 

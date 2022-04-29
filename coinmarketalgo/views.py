@@ -171,13 +171,11 @@ def sellcoinexchange(request):
                         print('Average Price Seller =', avg_price_transactions_seller)
                         avg_transactions = avg_price_transactions_seller
 
-
-                        Total_Avg_price_charge = (avg_transactions + avg_orders) / (total_bought_coin_transaction + total_bought_coin_purchase)  # 2) Totale Average price in charged in your wallet
+                        try:
+                            Total_Avg_price_charge = (avg_transactions + avg_orders) / (total_bought_coin_transaction + total_bought_coin_purchase)  # 2) Totale Average price in charged in your wallet                        
+                        except ZeroDivisionError:
+                            Total_Avg_price_charge = 0                                                                        
                         print('TOTAL Average Loading Price', str(Total_Avg_price_charge))
-
-
-
-
 
                         # total_avg_price_seller = (avg_transactions + avg_orders) / 2          # 3) arithmetic mean of the two averages
                         # print('Total Average Loading Price =', total_avg_price_seller)
@@ -262,8 +260,13 @@ def sellcoinexchange(request):
                                 avg_price_transactions_seller = 0
                             print('Average Price Seller =', avg_price_transactions_seller)
                             avg_transactions = avg_price_transactions_seller
-
-                            tot_Avg_price_charge = (avg_transactions + avg_orders) / (total_bought_coin_transaction + total_bought_coin_purchase)  # 2) Total Average price in charged in your wallet
+                            
+                            try:
+                                tot_Avg_price_charge = (avg_transactions + avg_orders) / (total_bought_coin_transaction + total_bought_coin_purchase)  # 2) Total Average price in charged in your wallet
+                                
+                            except ZeroDivisionError:
+                                tot_Avg_price_charge = 0
+                           
                             print('TOTAL Average Loading Price', str(tot_Avg_price_charge ))
 
                             # total_avg_price_seller = (avg_transactions + avg_orders) / 2          # 3) arithmetic mean of the two averages

@@ -4,6 +4,7 @@ from .forms import PurchaseForm, SaleCoin
 from django.contrib import messages
 from accounts.models import Profile
 from django.http import HttpResponseBadRequest
+from django.contrib.auth.decorators import login_required
 from .models import PrincipalHome, SellCoinExchange, Purchase
 from django.db.models import Avg, Max, Min, Sum
 from django.contrib.auth.models import User
@@ -11,6 +12,7 @@ from ordertransaction.models import Order, Transaction
 import math
 
 
+@login_required
 def buyalgomkt(request):
     current_price = algoValue()
     if request.method == "POST":
@@ -131,7 +133,7 @@ def buyalgomkt(request):
             request, "coinmarketalgo/purchase.html", {"form": form, "current_price": current_price}
         )
 
-
+@login_required
 def sellcoinexchange(request):
     ctv_sum_purchase = 0
     total_bought_coin_purchase = 0

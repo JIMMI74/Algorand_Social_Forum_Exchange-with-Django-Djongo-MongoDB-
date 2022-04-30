@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .models import OrderManager
 from django.views.generic import ListView
+from django.http import HttpResponseBadRequest
 
 
 @login_required
@@ -205,6 +206,8 @@ def placeOrders(request):
                         messages.success(request, 'great, your transaction was successful!')
 
             return redirect("match_orders")
+        else:
+            return HttpResponseBadRequest()
     else:
         form = OrderForm()
 

@@ -11,10 +11,12 @@
             {{ form|crispy }}
             <input class="btn-danger" type="submit" value="Buy ALGO Coin">
         </form>
-        <h2><strong>Current Price ALGO/USD ={{ new_price }}</strong></h2>        
+        <h2><strong>Market Price ALGO/USD ={{ current_price}}</strong></h2>
     </div>
  </div>
 <br><br>
 <H3>Purchase Commissions = 1%</H3>
+<br><br><br>
+<p><h5><u>*CURRENT PRICE, you must enter the Market Price value as above (Market Price)</u></h5></p>
 
 {% endblock content %}

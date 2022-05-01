@@ -26,4 +26,3 @@ the same thing is done with a sell order.
 20) when you sell exchanges you can do so at either market or limit price. The limit price is a price at or above the market price for up to 10% of the market price.
 21) The weighted average between the two averages will be the "average carrying price" used to sell to Coinmarketcap and realize your gain or loss.
 22) At the moment the profit follows a FloatField field, but it will be changed to a decimal, to make it more precise.
-

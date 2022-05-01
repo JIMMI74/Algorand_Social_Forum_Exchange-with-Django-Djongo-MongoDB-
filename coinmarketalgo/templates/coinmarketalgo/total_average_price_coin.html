@@ -2,7 +2,6 @@
 
 {% block head_title %}{{ block.super }} - {{ user }}{% endblock head_title %}
 {% block content %}
-
 <div class="row mt-3">
     <div class="col-sm-4"></div>
         <div class="card my-3">
@@ -15,7 +14,7 @@
                     <h5><u>Average Price</u></h5><span class="badge badge-secondary badge bg-info"><h5><strong>{{ avg_price }}</strong></h5></span>
                      <hr>
                         {% for coin in purchases %}
-                    <span><H5>°{{ coin.datetime }}</h5></span>
+                    <span><h5>°{{ coin.datetime }}</h5></span>
                     <p><strong>- Price = [{{ coin.purchased_price  }}] Coins Purchased =[{{ coin.purchased_coin }}]</strong></p>
                         {% endfor %}
                  <div class="card-footer bg-primary"></div>
@@ -23,7 +22,11 @@
         </div>
      </div>
 </div>
-<span class="badge badge-secondary badge bg-info"><h3><u>AVERAGE LOAD PRICE</u> = [{{ total_average_price_coin }}]</h3></span>
+<h5><strong><u>AVERAGE LOAD PRICE</u></strong></h5> <div  class="badge badge-secondary badge bg-warning text-dark">
+    <h5>[{{ total_average_price_coin }} USD]</h5></div>  *(weighted average between the two averages in case of sale to the exchange)
+<br><br><br>
+<h5><strong><u>GAIN/LOSS UPDATE YOUR WALLET</u></strong></h5>  <div class="badge badge-secondary badge bg-warning text-dark">
+    <h5>[{{ gain_loss_update }} USD]</h5></div> *(n coin in charge compared to the market)
 <div class="row mt-3">
     <div class="col-sm-4"></div>
         <div class="card my-3">

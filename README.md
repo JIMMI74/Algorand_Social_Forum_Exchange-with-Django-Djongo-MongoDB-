@@ -17,18 +17,13 @@ As a student,the aim was to create a Lightning Network, where the user buys coin
 12) If you place a buy order in the dex you cannot make a sell order, but you can cancel your order if there was no "matching" with another user.
 13) If you place a buy order in the dex you cannot make a sell order, but you can cancel your order if there was no "matching" with another user
 the same thing is done with a sell order.
-
 14)If you have placed a buy order, you can place subsequent orders at a price equal to or higher than the first order entered.
-
 15)You can view the status of your order in the public status to check if it is open or concluded.
-
 16)You also have a personal profile to see all your DEX transactions or CEX a wallet where you can check your gain / loss balance, number of coins and USD availability.
-
 17) when you want to buy coins from coinmarketcap you pay a 1% commission, while when you want to sell on the Exchange the commission is reduced to 0.5%.
-
 18) The sale on the Exchange is calculated taking into consideration the weighted average of the purchases in Cex and the weighted average of the purchases in DEX.
-
-19) The arithmetic average between the two will be the "average loading price" used for selling to Coinmarketcap and for the realization of your gain or loss.
-
-20) At the moment the profit follows a FloatField field, but it will be changed to a decimal, to make it more precise.
+19) when buying from the exchange you can buy either at market or limit price. The limit price is a price at or below the market for up to 10% of the market price.
+20) when you sell exchanges you can do so at either market or limit price. The limit price is a price at or above the market price for up to 10% of the market price.
+21) The weighted average between the two averages will be the "average carrying price" used to sell to Coinmarketcap and realize your gain or loss.
+22) At the moment the profit follows a FloatField field, but it will be changed to a decimal, to make it more precise.
 

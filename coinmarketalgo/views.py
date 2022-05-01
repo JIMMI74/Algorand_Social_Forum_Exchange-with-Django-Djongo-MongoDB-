@@ -333,6 +333,7 @@ def sellcoinexchange(request):
 
 
 def list_price_average(request, username):
+    current_price = algoValue()
     user = get_object_or_404(User, username=username)
     profile = Profile.objects.get(user=user)
     purchases = Purchase.objects.filter(profile=profile).order_by('-datetime')
@@ -376,10 +377,15 @@ def list_price_average(request, username):
         total_average_price_coin = 0
     print('Total average price coin =', total_average_price_coin)
 
+    gain_loss_update = round((profile.ALGO_Wallet * current_price) - (profile.ALGO_Wallet * total_average_price_coin),6)
+
     context = {'user': user, 'profile': profile, 'purchases': purchases,
                'orders': orders, 'transactions': transactions, 'avg_price': avg_price, 'avg_price_tr': avg_price_tr,
-               'total_average_price_coin': total_average_price_coin, 'orders_seller': orders_seller}
+               'total_average_price_coin': total_average_price_coin, 'orders_seller': orders_seller,
+               'gain_loss_update': gain_loss_update, 'current_price': current_price}
     return render(request, 'coinmarketalgo/total_average_price_coin.html', context)
+
+
 
 
 def HomePrincipalView(request):
